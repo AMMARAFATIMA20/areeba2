@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>E-commerce Checkout Flow - SkillCraft</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; }
+  .step { display: none; }
+  .step.active { display: block; }
+  button { padding: 10px 15px; margin-top: 20px; }
+  input { width: 100%; padding: 8px; margin: 5px 0 15px 0; }
+</style>
+</head>
+<body>
+<h1>E-commerce Checkout Flow</h1>
+<form id="checkoutForm">
+  <div class="step active">
+    <h2>Shipping Details</h2>
+    <input type="text" placeholder="Full Name" required />
+    <input type="text" placeholder="Address" required />
+    <input type="text" placeholder="City" required />
+    <button type="button" onclick="nextStep()">Next</button>
+  </div>
+  <div class="step">
+    <h2>Payment Information</h2>
+    <input type="text" placeholder="Card Number" required />
+    <input type="text" placeholder="Expiry Date" required />
+    <input type="text" placeholder="CVV" required />
+    <button type="button" onclick="prevStep()">Previous</button>
+    <button type="button" onclick="nextStep()">Next</button>
+  </div>
+  <div class="step">
+    <h2>Review & Submit</h2>
+    <p>Please review your information before submitting.</p>
+    <button type="button" onclick="prevStep()">Previous</button>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+  const steps = document.querySelectorAll('.step');
+  let currentStep = 0;
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
+    });
+  }
+  function nextStep() {
+    if(currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
+  function prevStep() {
+    if(currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  }
+  document.getElementById('checkoutForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Order submitted! Thank you.');
+  });
+</script>
+</body>
+</html>
